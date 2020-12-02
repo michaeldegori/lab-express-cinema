@@ -160,13 +160,16 @@ Here, you have to create a page to display all the info about each movie. You ne
 
 ![image](https://user-images.githubusercontent.com/23629340/36986933-6f8060b4-209b-11e8-8571-496914f9ae96.png)
 
-### Iteration 5 | Add a Movie (Bonus)
+## PART II
 
-#### Iteration 5 (Part 1)
+### Iteration 6 | Add a Movie 
 
 For the bonus, you have to create a page to inster a new movie. You need a `movie` POST route, where the user can enter all the info about each movie(for this iteration you can just reference an URL form web for movie image), and create a new movie after clicking on the Save button on the `/movies/new` page.
 
-#### Iteration 5 (Part 2)
+#### Iteration 7 | Edit a Movie
+For the bonus, you have to create a page to update a new movie. You need a `movie` PUT route. To edit a movie, you first have to fetch the movie in React and prepopulated all the form state with it. If you click on the edit button, you have send all the form data plus the id of the movie to the PUT route and process it.
+
+#### Iteration 8  (Bonus)
 
 Finally, we can insert a new image for the movie. You will want to store your <a href="https://my.ironhack.com/lms/courses/course-v1:IRONHACK+WDFT+202003_MIA/units/ironhack-course-chapter_7-sequential-vertical_1" target="_blank">image</a>(talk to your LT/TA after you are done with previous iterations)
 
