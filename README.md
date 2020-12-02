@@ -162,12 +162,16 @@ Here, you have to create a page to display all the info about each movie. You ne
 
 ## PART II
 
-### Iteration 6 | Add a Movie 
+#### Iteration 6 | Add a Movie 
 
 For the bonus, you have to create a page to inster a new movie. You need a `movie` POST route, where the user can enter all the info about each movie(for this iteration you can just reference an URL form web for movie image), and create a new movie after clicking on the Save button on the `/movies/new` page.
 
 #### Iteration 7 | Edit a Movie
 For the bonus, you have to create a page to update a new movie. You need a `movie` PUT route. To edit a movie, you first have to fetch the movie in React and prepopulated all the form state with it. If you click on the edit button, you have send all the form data plus the id of the movie to the PUT route and process it.
+
+
+#### Iteration 7 | Delete a Movie
+Create a delete button on the detail page of each movie and create a `app.get("/movie/delete/:id", ...` route on the backend. 
 
 #### Iteration 8  (Bonus)
 
