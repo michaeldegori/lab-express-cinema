@@ -4,6 +4,7 @@ import { Link, Switch, Route } from 'react-router-dom';
 import NewMovieForm from './components/NewMovieForm';
 import Movies from './components/Movies';
 import UpdateMovieForm from './components/UpdateMovieForm';
+import MovieDetails from './components/MovieDetails'
 
 const App = () => {
   return (
@@ -17,7 +18,8 @@ const App = () => {
         <Route exact path="/" render={(props) => <Home {...props} />} />
         <Route exact path="/movies" render={(props) => <Movies {...props} />} />
         <Route exact path="/movie/new" render={(props) => <NewMovieForm {...props} />} />
-        <Route exact path="/movie/edit" render={(props) => <UpdateMovieForm {...props} />} />
+        <Route exact path="/movie/:id" render={(props) => <MovieDetails {...props} />} />
+        <Route exact path="/movie/edit/:id" render={(props) => <UpdateMovieForm {...props} />} />
       </Switch>
 
     </div>

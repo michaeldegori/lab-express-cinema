@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const UpdateMovieForm = () => {
+const UpdateMovieForm = (props) => {
 
-  const [movieSearch, setMovieSearch] = useState({
-    title: ""
-  })
 
   const [movieUpdate, setMovieUpdate] = useState({
     title: "",
@@ -14,22 +11,13 @@ const UpdateMovieForm = () => {
     description: ""
   })
 
-  const getMovie = (event) => {
-    event.preventDefault();
-
+  useEffect(() => {
     axios
-      .get("http://localhost:3000/movies", { params: { title: movieSearch.title } })
-      .then((response) => {
-        debugger;
+      .get(`http://localhost:3000/movie/${props.match.params.id}`)
+      .then((res) => {
+        setMovieUpdate(res.data)
       })
-  }
-
-  const handleSearchChange = (event) => {
-    setMovieSearch({
-      ...movieSearch,
-      [event.target.name]: event.target.value,
-    });
-  }
+  }, [])
 
   const handleChange = (event) => {
     setMovieUpdate({
@@ -42,9 +30,10 @@ const UpdateMovieForm = () => {
     event.preventDefault();
 
     axios
-      .put("http://localhost:3000/movies", movieUpdate)
+      .put(`http://localhost:3000/movie/${movieUpdate._id}`, movieUpdate)
       .then((response) => {
         console.log("Movie updated from React!!");
+        debugger;
       })
       .catch(err => {
         console.log(err);
@@ -53,42 +42,32 @@ const UpdateMovieForm = () => {
 
   return (
     <div>
-      <form onSubmit={getMovie}>
-        <input
-          type="text"
-          name="title"
-          placeholder="which movie?"
-          value={movieSearch.title}
-          onChange={handleSearchChange}
-        />
-        <button typ="submit">Search</button>
-      </form>
       <form onSubmit={updateMovie}>
         <input
           type="text"
           name="title"
-          placeholder="title"
+          placeholder={movieUpdate.title}
           value={movieUpdate.title}
           onChange={handleChange}
         />
         <input
           type="text"
           name="director"
-          placeholder="director"
+          placeholder={movieUpdate.director}
           value={movieUpdate.director}
           onChange={handleChange}
         />
         <input
           type="text"
           name="image"
-          placeholder="image"
+          placeholder={movieUpdate.image}
           value={movieUpdate.image}
           onChange={handleChange}
         />
         <input
           type="text"
           name="description"
-          placeholder="description"
+          placeholder={movieUpdate.description}
           value={movieUpdate.description}
           onChange={handleChange}
         />
