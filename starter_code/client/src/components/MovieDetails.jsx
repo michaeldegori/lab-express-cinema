@@ -6,7 +6,6 @@ const MovieDetails = (props) => {
 
   const [movie, setMovie] = useState({})
 
-
   useEffect(() => {
     axios
       .get(`http://localhost:3000/movie/${props.match.params.id}`)
