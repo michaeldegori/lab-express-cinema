@@ -13,7 +13,10 @@ const Login = (props) => {
 
     Axios
       .post("http://localhost:3000/auth/login", user)
-      .then(res => localStorage.setItem("token", res.data.token))
+      .then(res => {
+        localStorage.setItem("token", res.data.token);
+        props.history.push("/movie/new")
+      })
       .catch(err => console.log(err))
   }
 
