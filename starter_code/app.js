@@ -48,9 +48,7 @@ app.get('/movies', (req, res) => {
     .then(films => {
       res.json(films);
     })
-    .catch(err =>
-      console.log(err)
-    )
+    .catch(err => console.log(err))
 })
 
 app.get('/movie/:id', (req, res) => {
