@@ -9,6 +9,7 @@ const path = require("path");
 const jwt = require('jsonwebtoken');
 const cors = require("cors");
 const Movie = require('./models/Movie')
+const User = require('./models/User')
 
 app.options('*', cors())
 app.use(cors());
@@ -44,6 +45,20 @@ app.listen(3000, () => {
   console.log('Running...')
 })
 
+app.post('/signup', (req, res) => {
+  User
+    .create({
+      email: req.body.email,
+      password: req.body.password
+    })
+    .then(user => {
+      res.status(200).send("User created")
+    })
+    .catch(err => {
+      res.status(500).send("Error!")
+    })
+})
+
 app.get('/movies', (req, res) => {
   Movie.find({})
     .then(films => {
@@ -53,7 +68,8 @@ app.get('/movies', (req, res) => {
 })
 
 app.get('/movie/:id', (req, res) => {
-  Movie.findById(req.params.id)
+  Movie
+    .findById(req.params.id)
     .then(movie => {
       res.json(movie)
     })
