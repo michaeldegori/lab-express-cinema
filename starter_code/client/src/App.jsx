@@ -4,7 +4,9 @@ import { Link, Switch, Route } from 'react-router-dom';
 import NewMovieForm from './components/NewMovieForm';
 import Movies from './components/Movies';
 import UpdateMovieForm from './components/UpdateMovieForm';
-import MovieDetails from './components/MovieDetails'
+import MovieDetails from './components/MovieDetails';
+import Signup from './components/Signup';
+import Login from './components/Login';
 
 const App = () => {
   return (
@@ -16,6 +18,8 @@ const App = () => {
 
       <Switch>
         <Route exact path="/" render={(props) => <Home {...props} />} />
+        <Route exact path="/signup" render={(props) => <Signup {...props} />} />
+        <Route exact path="/login" render={(props) => <Login {...props} />} />
         <Route exact path="/movies" render={(props) => <Movies {...props} />} />
         <Route exact path="/movie/new" render={(props) => <NewMovieForm {...props} />} />
         <Route exact path="/movie/:id" render={(props) => <MovieDetails {...props} />} />

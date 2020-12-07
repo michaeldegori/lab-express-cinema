@@ -41,24 +41,6 @@ const debug = require("debug")(
   `${app_name}:${path.basename(__filename).split(".")[0]}`
 );
 
-app.listen(3000, () => {
-  console.log('Running...')
-})
-
-app.post('/signup', (req, res) => {
-  User
-    .create({
-      email: req.body.email,
-      password: req.body.password
-    })
-    .then(user => {
-      res.status(200).send("User created")
-    })
-    .catch(err => {
-      res.status(500).send("Error!")
-    })
-})
-
 app.get('/movies', (req, res) => {
   Movie.find({})
     .then(films => {
@@ -79,24 +61,53 @@ app.get('/movie/:id', (req, res) => {
 })
 
 app.post('/movies', (req, res) => {
-  Movie.create(req.body)
-    .then(movie => {
-      res.send("Movie Created!")
-    })
-    .catch(err =>
-      console.log(err)
-    )
+
+  const token = req.headers.authorization.split(' ')[1];
+  if (!token) res.status(403).send("Unauthenticated");
+
+  const decoded = jwt.verify(token, "secret");
+  if (!decoded) res.status(403).send("Unauthenticated");
+
+  User.findById(decoded.id).then(user => {
+    if (!user) res.status(403).send("Unauthenticated");
+    else {
+      Movie.create(req.body)
+        .then(movie => {
+          res.send("Movie Created!")
+        })
+        .catch(err =>
+          console.log(err)
+        )
+    }
+  })
 })
 
 app.put('/movies', (req, res) => {
-  Movie.findOneAndUpdate(req.body)
-    .then(movie => {
-      res.send("Movie Updated!")
-    })
-    .catch(err =>
-      console.log(err)
-    )
+
+  const token = req.headers.authorization.split(' ')[1];
+  if (!token) res.status(403).send("Unauthenticated");
+
+  const decoded = jwt.verify(token, "secret");
+  if (!decoded) res.status(403).send("Unauthenticated");
+
+  User.findById(decoded.id).then(user => {
+    if (!user) res.status(403).send("Unauthenticated");
+    else {
+      Movie.findOneAndUpdate(req.body)
+        .then(movie => {
+          res.send("Movie Updated!")
+        })
+        .catch(err =>
+          console.log(err)
+        )
+    }
+  })
 })
 
+app.use("/auth", require("./routes/users"));
+
+app.listen(3000, () => {
+  console.log('Running...')
+})
 
 module.exports = app;
