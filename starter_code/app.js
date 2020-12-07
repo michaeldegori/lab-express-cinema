@@ -6,6 +6,7 @@ const app = express();
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
+const jwt = require('jsonwebtoken');
 const cors = require("cors");
 const Movie = require('./models/Movie')
 
