@@ -42,7 +42,7 @@ const debug = require("debug")(
 );
 
 app.get('/movies', (req, res) => {
-  Movie.find({})
+  Movie.find()
     .then(films => {
       res.json(films);
     })
